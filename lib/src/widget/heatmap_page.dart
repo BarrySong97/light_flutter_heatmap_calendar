@@ -80,12 +80,17 @@ class HeatMapPage extends StatelessWidget {
 
   final bool? showText;
 
+  // custom week labels
+  // for localization purpose
+  // 1. if weekdayLabels is null, then use default labels(en)
+  final List<String>? weekdayLabels;
   HeatMapPage({
     Key? key,
     required this.colorMode,
     required this.startDate,
     required this.endDate,
     this.monthLabels,
+    this.weekdayLabels,
     this.size,
     this.fontSize,
     this.datasets,
@@ -128,6 +133,7 @@ class HeatMapPage extends StatelessWidget {
         size: size,
         fontSize: fontSize,
         defaultColor: defaultColor,
+        weekdayLabels: weekdayLabels,
         colorsets: colorsets,
         textColor: textColor,
         borderRadius: borderRadius,
@@ -155,6 +161,7 @@ class HeatMapPage extends StatelessWidget {
             // Show week labels to left side of heatmap.
             HeatMapWeekText(
               margin: margin,
+              weekdayLabels: weekdayLabels,
               fontSize: fontSize,
               size: size,
               fontColor: textColor,

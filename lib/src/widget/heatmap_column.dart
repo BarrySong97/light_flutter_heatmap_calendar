@@ -73,12 +73,17 @@ class HeatMapColumn extends StatelessWidget {
   // current week.
   final int numDays;
 
+  // custom week labels
+  // for localization purpose
+  // 1. if weekdayLabels is null, then use default labels(en)
+  final List<String>? weekdayLabels;
   HeatMapColumn({
     Key? key,
     required this.startDate,
     required this.endDate,
     required this.colorMode,
     required this.numDays,
+    this.weekdayLabels,
     this.size,
     this.fontSize,
     this.defaultColor,

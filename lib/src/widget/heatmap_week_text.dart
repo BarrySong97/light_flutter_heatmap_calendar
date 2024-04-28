@@ -14,9 +14,14 @@ class HeatMapWeekText extends StatelessWidget {
   /// The color value of every font's color.
   final Color? fontColor;
 
+  // custom week labels
+  // for localization purpose
+  // 1. if weekdayLabels is null, then use default labels(en)
+  final List<String>? weekdayLabels;
   const HeatMapWeekText({
     Key? key,
     this.margin,
+    this.weekdayLabels,
     this.fontSize,
     this.size,
     this.fontColor,
@@ -24,10 +29,17 @@ class HeatMapWeekText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> finalWeekLabels = [];
+    if (weekdayLabels == null) {
+      finalWeekLabels = DateUtil.WEEK_LABEL;
+    } else {
+      finalWeekLabels = weekdayLabels!;
+      finalWeekLabels.insert(0, "");
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        for (String label in DateUtil.WEEK_LABEL)
+        for (String label in finalWeekLabels)
           Container(
             height: size ?? 20,
             margin: margin ?? const EdgeInsets.all(2.0),

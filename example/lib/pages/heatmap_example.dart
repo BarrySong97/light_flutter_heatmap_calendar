@@ -71,6 +71,7 @@ class _HeatMapExample extends State<HeatMapExample> {
                     "11月",
                     "12月"
                   ],
+                  weekdayLabels: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
                   scrollable: true,
                   colorMode:
                       isOpacityMode ? ColorMode.opacity : ColorMode.color,

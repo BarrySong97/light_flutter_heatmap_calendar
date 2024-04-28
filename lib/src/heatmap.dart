@@ -10,6 +10,11 @@ class HeatMap extends StatefulWidget {
   // 1. if monthLabels is null, then use default labels(en)
   final List<String>? monthLabels;
 
+  // custom week labels
+  // for localization purpose
+  // 1. if weekdayLabels is null, then use default labels(en)
+  final List<String>? weekdayLabels;
+
   /// The Date value of start day of heatmap.
   ///
   /// HeatMap shows the start day of [startDate]'s week.
@@ -96,6 +101,7 @@ class HeatMap extends StatefulWidget {
     Key? key,
     required this.colorsets,
     this.monthLabels,
+    this.weekdayLabels,
     this.colorMode = ColorMode.opacity,
     this.startDate,
     this.endDate,
@@ -144,6 +150,7 @@ class _HeatMap extends State<HeatMap> {
           colorMode: widget.colorMode,
           size: widget.size,
           monthLabels: widget.monthLabels,
+          weekdayLabels: widget.weekdayLabels,
           fontSize: widget.fontSize,
           datasets: widget.datasets,
           defaultColor: widget.defaultColor,
