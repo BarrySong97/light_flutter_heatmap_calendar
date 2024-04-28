@@ -19,14 +19,19 @@ class HeatMapMonthText extends StatelessWidget {
   /// The margin value for correctly space between labels.
   final EdgeInsets? margin;
 
-  const HeatMapMonthText({
-    Key? key,
-    this.firstDayInfos,
-    this.fontSize,
-    this.fontColor,
-    this.size,
-    this.margin,
-  }) : super(key: key);
+  // custom month labels
+  // for localization purpose
+  // 1. if monthLabels is null, then use default labels(en)
+  final List<String>? monthLabels;
+  const HeatMapMonthText(
+      {Key? key,
+      this.firstDayInfos,
+      this.fontSize,
+      this.fontColor,
+      this.size,
+      this.margin,
+      this.monthLabels})
+      : super(key: key);
 
   /// The list of every month labels and fitted space.
   List<Widget> _labels() {
@@ -35,6 +40,13 @@ class HeatMapMonthText extends StatelessWidget {
     // Set true if previous week was the first day of the month.
     bool _write = false;
 
+    List<String> finalMonthLabels = [];
+    if (monthLabels == null) {
+      finalMonthLabels = DateUtil.SHORT_MONTH_LABEL;
+    } else {
+      finalMonthLabels = monthLabels!;
+      finalMonthLabels.insert(0, "");
+    }
     // Loop until check every given weeks.
     for (int label = 0; label < (firstDayInfos?.length ?? 0); label++) {
       // If given week is first week of given datesets or
@@ -46,14 +58,15 @@ class HeatMapMonthText extends StatelessWidget {
         // Add Text without width margin if first week is end of the month.
         // Otherwise, add Text with width margin.
         items.add(
-          firstDayInfos!.length == 1 || (label == 0 && firstDayInfos![label] != firstDayInfos![label + 1])
-              ? _renderText(DateUtil.SHORT_MONTH_LABEL[firstDayInfos![label]])
+          firstDayInfos!.length == 1 ||
+                  (label == 0 &&
+                      firstDayInfos![label] != firstDayInfos![label + 1])
+              ? _renderText(finalMonthLabels[firstDayInfos![label]])
               : Container(
                   width: (((size ?? 20) + (margin?.right ?? 2)) * 2),
                   margin: EdgeInsets.only(
                       left: margin?.left ?? 2, right: margin?.right ?? 2),
-                  child: _renderText(
-                      DateUtil.SHORT_MONTH_LABEL[firstDayInfos![label]]),
+                  child: _renderText(finalMonthLabels[firstDayInfos![label]]),
                 ),
         );
       } else if (_write) {

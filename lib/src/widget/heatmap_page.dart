@@ -73,6 +73,11 @@ class HeatMapPage extends StatelessWidget {
   /// Paratmeter gives clicked [DateTime] value.
   final Function(DateTime)? onClick;
 
+  // custom month labels
+  // for localization purpose
+  // 1. if monthLabels is null, then use default labels(en)
+  final List<String>? monthLabels;
+
   final bool? showText;
 
   HeatMapPage({
@@ -80,6 +85,7 @@ class HeatMapPage extends StatelessWidget {
     required this.colorMode,
     required this.startDate,
     required this.endDate,
+    this.monthLabels,
     this.size,
     this.fontSize,
     this.datasets,
@@ -160,6 +166,7 @@ class HeatMapPage extends StatelessWidget {
                 HeatMapMonthText(
                   firstDayInfos: _firstDayInfos,
                   margin: margin,
+                  monthLabels: monthLabels,
                   fontSize: fontSize,
                   fontColor: textColor,
                   size: size,

@@ -5,6 +5,11 @@ import './data/heatmap_color_mode.dart';
 import './util/date_util.dart';
 
 class HeatMap extends StatefulWidget {
+  // custom month labels
+  // for localization purpose
+  // 1. if monthLabels is null, then use default labels(en)
+  final List<String>? monthLabels;
+
   /// The Date value of start day of heatmap.
   ///
   /// HeatMap shows the start day of [startDate]'s week.
@@ -90,6 +95,7 @@ class HeatMap extends StatefulWidget {
   const HeatMap({
     Key? key,
     required this.colorsets,
+    this.monthLabels,
     this.colorMode = ColorMode.opacity,
     this.startDate,
     this.endDate,
@@ -137,6 +143,7 @@ class _HeatMap extends State<HeatMap> {
               DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),
           colorMode: widget.colorMode,
           size: widget.size,
+          monthLabels: widget.monthLabels,
           fontSize: widget.fontSize,
           datasets: widget.datasets,
           defaultColor: widget.defaultColor,
